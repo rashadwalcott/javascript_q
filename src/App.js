@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Questions from './quizQuestions';
+import { quizzes } from './quizzes';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from 'react'
+
+export default class App extends Component {
+  // Initializing State
+      state = {
+        quiz: quizzes[0]
+      }
+      
+
+      showQuiz = () => {
+        let questions = [];
+        for (let eachQuest in this.state.quiz.questions){
+          questions.push( this.state.quiz.questions[eachQuest])
+        }
+        return questions;
+        }
+      
+  render() {
+    // console.log(this.state.quiz.questions);
+    
+    return (
+      <div>
+        <h1>{this.state.quiz.title}</h1>
+        <Questions  questions= {this.showQuiz()}/>
+      </div>
+    );
+  }
 }
-
-export default App;
