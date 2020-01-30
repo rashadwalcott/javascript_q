@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import Answers from './components/answers';
 
 export default class MultipleChoiceQuiz extends Component {
     // Initializing State
     state ={
         quiz: 0,
         question: 0,
-        incomplete: true
+        incomplete: true,
+        clicked: false,
+        correct: 0,
+        incorrect: 0
     }
 
      //Function that handles all the answers
@@ -17,20 +21,6 @@ export default class MultipleChoiceQuiz extends Component {
         let shuffle = require('shuffle-array');
         return shuffle(allAnswers);
     }
-    //Function that is mapping and displaying the answers
-    showAnswers = () => {
-        return (
-            <div>
-                <ol type= "A">
-                    {this.handleAnswers().map((answer, index) => (
-                        <li key = {index}>
-                        <span>{answer}</span>
-                        </li>
-                    ))}
-                </ol>
-            </div>
-        )
-    }
 
     //Function that handles the next question
         handleNext = () => {
@@ -38,7 +28,9 @@ export default class MultipleChoiceQuiz extends Component {
                 this.setState({question: this.state.question + 1})
             }
             else {
-                this.setState({incomplete: false})
+                this.setState({incomplete: false,
+                    clicked: false
+                })
             }
         }
        
@@ -55,7 +47,10 @@ export default class MultipleChoiceQuiz extends Component {
                 <>
                 <h1>{title}</h1>
                 <h2>{question}</h2>
-                <div>{this.showAnswers()}</div>
+                <Answers answers = {this.handleAnswers()} 
+                    handleNext = {this.handleNext}
+                    correctAnswer = {this.props.quizzes[this.state.quiz].questions[this.state.question].correctAnswer}
+                />
                 <button onClick = {this.handleNext}>
                     Next
                 </button>
