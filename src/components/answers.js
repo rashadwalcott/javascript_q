@@ -25,7 +25,7 @@ export default class Answers extends Component {
 
     //Function that is checking for the correct answer
     checkAnswer = (event, index) =>{
-        console.log(event.target);
+        console.log(event.target.innerText);
         
         
     }
