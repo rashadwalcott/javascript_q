@@ -4,8 +4,7 @@ export default class Answers extends Component {
     state = {
         clicked: false,
         correct: 0,
-        incorrect: 0,
-        id: ''
+        incorrect: 0
     }
     //Function that is mapping and displaying the answers
     showAnswers = () => {
